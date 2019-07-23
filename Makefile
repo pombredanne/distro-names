@@ -11,7 +11,7 @@ clean:
 .PHONY: test
 test:
 	@echo "Running tests..."
-	@echo "<TBI>"
+	@pytest
 
 .PHONY: build
 build: test clean

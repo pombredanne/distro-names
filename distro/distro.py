@@ -18,7 +18,7 @@ def main():
     ap.add_argument('search_term', nargs='*', help='Search terms, it can be a string or field:string')
     args = ap.parse_args()
 
-    distros = [Distro(**dt) for dt in data]
+    distros = load()
     results = search(args.search_term, distros)
 
     if args.output == 'text':
@@ -27,6 +27,10 @@ def main():
         display_json(results)
     elif args.output == 'csv':
         display_csv(results)
+
+
+def load():
+    return [Distro(**dt) for dt in data]
 
 
 def search(terms, distros):
