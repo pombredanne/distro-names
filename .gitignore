@@ -1,0 +1,18 @@
+# PyCharm
+.idea/
+
+# PyEnv
+**/.python-version
+
+# Python
+**/__pycache__
+**/*.pyc
+
+# Python Setuptools
+build/
+dist/
+**/*egg-info*
+
+# General
+**/.DS_*
+tmp/
