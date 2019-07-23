@@ -5,18 +5,53 @@
 
 __version__ = '0.0.1'
 
-import sys
+# import sys
+import argparse
 
 from distro.data import data
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-o', '--output', type=str, default='text', help='Output format (text|json|csv)')
+    ap.add_argument('search_term', nargs='*', help='Search terms, it can be a string or field:string')
+    args = ap.parse_args()
+
     distros = [Distro(**dt) for dt in data]
-    print("OS Distro finder version %s." % __version__)
-    print("List of argument strings: %s" % sys.argv[1:])
+    results = search(args.search_term, distros)
+
+    if args.output == 'text':
+        display_text(results)
+    elif args.output == 'json':
+        display_json(results)
+    elif args.output == 'csv':
+        display_csv(results)
+
+
+def search(terms, distros):
+    results = []
 
     for d in distros:
-        print(d)
+        if all(t in d.raw() for t in terms):
+            results.append(d)
+
+    return results
+
+
+def display_text(results):
+    for r in results:
+        print(r)
+
+
+def display_csv(results):
+    for r in results:
+        print(r.raw())
+
+
+def display_json(results):
+    print('NOT IMPLEMENTED')
+    for r in results:
+        print(r.raw())
 
 
 class Distro(object):
@@ -44,6 +79,17 @@ class Distro(object):
         s = ''
         for k, v in sorted(self.data.items()):
             s += '{}:'.format(k.replace('_', ' ').title()).ljust(lpad, ' ')
-            s += '{}\n'.format(v)
-        s += '\n'
+            if isinstance(v, list):
+                s += '{}\n'.format(', '.join(v))
+            else:
+                s += '{}\n'.format(v)
         return s
+
+    def raw(self):
+        out = list()
+        for k, v in sorted(self.data.items()):
+            if isinstance(v, list):
+                out.append('{}:{}'.format(k, ','.join(v)))
+            else:
+                out.append('{}:{}'.format(k, v))
+        return ','.join(out).lower()
