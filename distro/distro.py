@@ -5,7 +5,8 @@
 
 __version__ = '0.0.1'
 
-# import sys
+# TODO: Fix search for subterm, e.g. searching for '8' returns 8, 18, 28... Perhaps add "exact" matching for words...
+
 import argparse
 
 from distro.data import data
