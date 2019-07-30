@@ -37,14 +37,3 @@ $ pip install distro-names
 Please feel free to contribute to this humble project - you can add distro names and versions to `distro/data.py` or improve the search capabilities in `distro/distro.py`.
 
 This is a `pure Python` implementation, so no libs are required. If you'd like to contribute, only PyTest and make are required...
-
-# TO DO
-
-- [ ] Automated tests for the Distro class
-- [ ] Automated tests for the CLI 
-- [ ] Homebrew tap for MacOS X installations
-- [ ] Port to Python 2
-- [ ] Fix Travis CI issues
-- [ ] Make this readme compatible with the PyPy format
-- [ ] Add lint checks
-- [ ] Add parameter `-v` to show the version
