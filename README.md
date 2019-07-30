@@ -40,6 +40,10 @@ This is a `pure Python` implementation, so no libs are required. If you'd like t
 
 # TO DO
 
-- Automated tests for the Distro class
-- Automated tests for the CLI 
-- Homebrew tap for MacOS X installations
+- [ ] Automated tests for the Distro class
+- [ ] Automated tests for the CLI 
+- [ ] Homebrew tap for MacOS X installations
+- [ ] Port to Python 2
+- [ ] Fix Travis CI issues
+- [ ] Make this readme compatible with the PyPy format
+- [ ] Add lint checks
