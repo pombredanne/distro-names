@@ -4,7 +4,7 @@ default: clean test build publish
 .PHONY: clean
 clean:
 	@echo "Cleaning up..."
-	rm -rf build/ dist/ distro_names.egg-info .pytest_cache || true
+	rm -rf build/ dist/ distro_names.egg-info .pytest_cache MANIFEST.in || true
 	find . -type d -name __pycache__ -exec rm -rf {} \; || true
 	find . -type f -name '*.pyc' -exec rm -rf {} \; || true
 
@@ -19,4 +19,4 @@ build: test clean
 
 .PHONY: publish
 publish: build
-	@twine upload dist/distro_names-*.egg
+#	@twine upload dist/distro_names-*.egg
