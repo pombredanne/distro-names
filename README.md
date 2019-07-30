@@ -1,8 +1,8 @@
-# distros-cli
+# distro-names
 
 `A way to search OS distribution names and versions`
 
-[![Build Status](https://travis-ci.org/igorlg/distros-app.svg?branch=master)](https://travis-ci.org/igorlg/distros-app)
+[![Build Status](https://travis-ci.org/igorlg/distro-names.svg?branch=master)](https://travis-ci.org/igorlg/distro-names)
 
 Aren't you tired of searching things like "Which version is Ubuntu Trusty again", or "is Debian 8 _stretch_ or _wheezy_"? Well, I am... so I wrote this small python script to match OS versions with their names and vice versa.
 
@@ -29,7 +29,7 @@ Versions:    7
 Using Python pip:
 
 ```bash
-$ pip install distros-app
+$ pip install distro-names
 ```
 
 # Contributing
@@ -47,3 +47,4 @@ This is a `pure Python` implementation, so no libs are required. If you'd like t
 - [ ] Fix Travis CI issues
 - [ ] Make this readme compatible with the PyPy format
 - [ ] Add lint checks
+- [ ] Add parameter `-v` to show the version

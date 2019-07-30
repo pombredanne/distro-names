@@ -4,9 +4,13 @@ default: clean test build publish
 .PHONY: clean
 clean:
 	@echo "Cleaning up..."
-	rm -rf build/ dist/ distro_names.egg-info .pytest_cache MANIFEST.in || true
-	find . -type d -name __pycache__ -exec rm -rf {} \; || true
-	find . -type f -name '*.pyc' -exec rm -rf {} \; || true
+	rm -rvf build/
+	rm -rvf dist/
+	rm -rvf distro_names.egg-info
+	rm -rvf .pytest_cache
+	rm -rvf MANIFEST.in
+	rm -rvf distro/__pycache__ distro/*.pyc
+	rm -rvf test/__pycache__ test/*.pyc
 
 .PHONY: test
 test:
@@ -14,9 +18,16 @@ test:
 	@pytest
 
 .PHONY: build
-build: test clean
+build: clean
 	@python setup.py sdist bdist bdist_egg
+	@twine check dist/*
+
+.PHONY: test-publish
+test-publish: build
+	@rm -f dist/distro-names-*mac*.tar.gz
+	@twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 .PHONY: publish
 publish: build
-#	@twine upload dist/distro_names-*.egg
+	@rm -f dist/distro-names-*mac*.tar.gz
+	@twine upload dist/*
