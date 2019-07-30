@@ -1,4 +1,17 @@
-data = [
+"""
+The Distro data. Names, versions, and any other information.
+
+The DATA variable is a Python LIST of DICTs, each dict is required, at a minimum:
+
+- a 'name' key of type String
+- either a 'version' key of type String OR a 'versions' key of type List (of strings)
+
+If no 'flavour' key is provided, the default will be 'Linux'
+
+Any other key/value pair will be added as is to the Distro object
+"""
+
+DATA = [
     # Ubuntu (source: http://releases.ubuntu.com/)
     {'name': 'precise', 'versions': ['12.04', '12.04.5'], 'full_name': 'Precise Pangolin', 'flavour': 'Ubuntu'},
     {'name': 'trusty', 'versions': ['14.04', '14.04.6'], 'full_name': 'Trusty Thar', 'flavour': 'Ubuntu'},

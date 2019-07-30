@@ -5,18 +5,17 @@
 
 __version__ = '0.0.2'
 
-# TODO: Fix search for subterm, e.g. searching for '8' returns 8, 18, 28... Perhaps add "exact" matching for words...
-
 import argparse
 
-from distro.data import data
+from distro.data import DATA
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('-o', '--output', type=str, default='text', help='Output format (text|json|csv)')
-    ap.add_argument('search_term', nargs='*', help='Search terms, it can be a string or field:string')
-    args = ap.parse_args()
+    """Main execution wrapper. Parsers CLI arguments, loads data, calls the search method and displays the results"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o', '--output', type=str, default='text', help='Output format (text|json|csv)')
+    parser.add_argument('search_term', nargs='*', help='Search terms, it can be a string or field:string')
+    args = parser.parse_args()
 
     distros = load()
     results = search(args.search_term, distros)
@@ -30,36 +29,43 @@ def main():
 
 
 def load():
-    return [Distro(**dt) for dt in data]
+    """Load data from distro/data.py, return a list of Distro() objects"""
+    return [Distro(**dt) for dt in DATA]
 
 
 def search(terms, distros):
+    """Search for items in the list of Distro() objects using the provided search terms."""
     results = []
 
-    for d in distros:
-        if all(t in d.raw() for t in terms):
-            results.append(d)
+    for dist in distros:
+        if all(t in dist.raw() for t in terms):
+            results.append(dist)
 
     return results
 
 
 def display_text(results):
-    for r in results:
-        print(r)
+    """Display search results in raw TEXT format"""
+    for result in results:
+        print(result)
 
 
 def display_csv(results):
-    for r in results:
-        print(r.raw())
+    """Display search results in CSV format"""
+    for result in results:
+        print(result.raw())
 
 
 def display_json(results):
+    """Display search results in JSON format"""
     print('NOT IMPLEMENTED')
-    for r in results:
-        print(r.raw())
+    for result in results:
+        print(result.raw())
 
 
-class Distro(object):
+class Distro:
+    """Distro data wrapper class. Instantiate with a dict"""
+
     def __init__(self, **kwargs):
         self.data = kwargs
 
@@ -75,26 +81,27 @@ class Distro(object):
         elif isinstance(self.data.get('versions', None), str):
             self.data['versions'] = list(self.data['versions'])
 
-        v = self.data.pop('version', None)
-        if v is not None and v not in self.data['versions']:
-            self.data['versions'].append(v)
+        ver = self.data.pop('version', None)
+        if ver is not None and ver not in self.data['versions']:
+            self.data['versions'].append(ver)
 
     def __str__(self):
-        lpad = max([len(k) for k in self.data.keys()]) + 5
-        s = ''
-        for k, v in sorted(self.data.items()):
-            s += '{}:'.format(k.replace('_', ' ').title()).ljust(lpad, ' ')
-            if isinstance(v, list):
-                s += '{}\n'.format(', '.join(v))
+        lpad = max([len(key) for key, val in self.data.items()]) + 5
+        out_str = ''
+        for key, val in sorted(self.data.items()):
+            out_str += '{}:'.format(key.replace('_', ' ').title()).ljust(lpad, ' ')
+            if isinstance(val, list):
+                out_str += '{}\n'.format(', '.join(val))
             else:
-                s += '{}\n'.format(v)
-        return s
+                out_str += '{}\n'.format(val)
+        return out_str
 
     def raw(self):
+        """Return data in simplified CSV format, all in lowercase"""
         out = list()
-        for k, v in sorted(self.data.items()):
-            if isinstance(v, list):
-                out.append('{}:{}'.format(k, ','.join(v)))
+        for key, val in sorted(self.data.items()):
+            if isinstance(val, list):
+                out.append('{}:{}'.format(key, ','.join(val)))
             else:
-                out.append('{}:{}'.format(k, v))
+                out.append('{}:{}'.format(key, val))
         return ','.join(out).lower()

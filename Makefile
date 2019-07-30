@@ -15,6 +15,7 @@ clean:
 .PHONY: test
 test:
 	@echo "Running tests..."
+	@pylint distro
 	@pytest
 
 .PHONY: build
