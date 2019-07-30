@@ -3,7 +3,7 @@
 
 """distro.distro: provides entry point main()."""
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 import argparse
 
@@ -14,8 +14,13 @@ def main():
     """Main execution wrapper. Parsers CLI arguments, loads data, calls the search method and displays the results"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output', type=str, default='text', help='Output format (text|json|csv)')
+    parser.add_argument('-v', '--version', action='store_true', help='Show version')
     parser.add_argument('search_term', nargs='*', help='Search terms, it can be a string or field:string')
     args = parser.parse_args()
+
+    if args.version:
+        print('v' + __version__)
+        exit(0)
 
     distros = load()
     results = search(args.search_term, distros)

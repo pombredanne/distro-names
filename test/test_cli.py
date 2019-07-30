@@ -11,3 +11,6 @@ class TestDistroSearch(object):
     def test_single_term_no_result(self):
         main()
         raise NotImplementedError
+
+    def test_version(self):
+        raise NotImplementedError
