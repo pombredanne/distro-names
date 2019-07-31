@@ -58,4 +58,22 @@ DATA = [
     {'name': 'tara', 'version': '19', 'flavour': 'Mint'},
     {'name': 'tessa', 'version': '19.1', 'flavour': 'Mint'},
     {'name': 'tina', 'version': '19.2', 'flavour': 'Mint'},
+
+    # Mac OS X (source: https://en.wikipedia.org/wiki/MacOS#Release_history)
+    {'name': 'cheetah', 'version': '10.0', 'full_name': 'Mac OS X 10.0 Cheetah', 'flavour': 'MacOS'},
+    {'name': 'puma', 'version': '10.1', 'full_name': 'Mac OS X 10.1 Puma', 'flavour': 'MacOS'},
+    {'name': 'jaguar', 'version': '10.2', 'full_name': 'Mac OS X 10.2 Jaguar', 'flavour': 'MacOS'},
+    {'name': 'panther', 'version': '10.3', 'full_name': 'Mac OS X 10.3 Panther', 'flavour': 'MacOS'},
+    {'name': 'tiger', 'version': '10.4', 'full_name': 'Mac OS X 10.4 Tiger', 'flavour': 'MacOS'},
+    {'name': 'leopard', 'version': '10.5', 'full_name': 'Mac OS X 10.5 Leopard', 'flavour': 'MacOS'},
+    {'name': 'snow leopard', 'version': '10.6', 'full_name': 'Mac OS X 10.6 Snow Leopard', 'flavour': 'MacOS'},
+    {'name': 'lion', 'version': '10.7', 'full_name': 'Mac OS X 10.7 Lion', 'flavour': 'MacOS'},
+    {'name': 'mountain lion', 'version': '10.8', 'full_name': 'OS X 10.8 Mountain Lion', 'flavour': 'MacOS'},
+    {'name': 'mavericks', 'version': '10.9', 'full_name': 'OS X 10.9 Mavericks', 'flavour': 'MacOS'},
+    {'name': 'yosemite', 'version': '10.10', 'full_name': 'OS X 10.10 Yosemite', 'flavour': 'MacOS'},
+    {'name': 'el capitan', 'version': '10.11', 'full_name': 'OS X 10.11 El Capitan', 'flavour': 'MacOS'},
+    {'name': 'sierra', 'version': '10.12', 'full_name': 'macOS 10.12 Sierra', 'flavour': 'MacOS'},
+    {'name': 'high sierra', 'version': '10.13', 'full_name': 'macOS 10.13 High Sierra', 'flavour': 'MacOS'},
+    {'name': 'mojave', 'version': '10.14', 'full_name': 'macOS 10.14 Mojave', 'flavour': 'MacOS'},
+    {'name': 'catalina', 'version': '10.15', 'full_name': 'macOS 10.15 Catalina', 'flavour': 'MacOS'},
 ]
